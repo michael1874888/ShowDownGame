@@ -98,12 +98,14 @@ void Game::namePlayers( void )
 void Game::drawCards( void )
 {
 	cout << "Start drawing cards!" << endl;
-	for( int i = 0; i < TOTAL_PLAYER_NUM; i++ ) {
-		if( m_Deck.getCardNum() == 0 ) {
-			break;
-		}
+	while( m_Deck.getCardNum() > 0 ) {
+		for( int i = 0; i < TOTAL_PLAYER_NUM; i++ ) {
+			if( m_Deck.getCardNum() == 0 ) {
+				break;
+			}
 
-		m_pPlayers[ i ]->drawCards( m_Deck );
+			m_pPlayers[ i ]->drawCards( m_Deck );
+		}
 	}
 
 	cout << "Draw cards Finished!" << endl;
