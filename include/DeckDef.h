@@ -1,0 +1,1 @@
+#define TOTAL_CARD_NUM ( 52 )
