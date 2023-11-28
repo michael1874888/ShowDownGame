@@ -48,6 +48,9 @@ void Game::executeRounds( void )
 	vector< Card > CompareList;
 
 	for( int i = 0; i < TOTAL_ROUNDS; i++ ) {
+		// initialize vector
+		CompareList.clear();
+
 		// take turn
 		takeTurn( &CompareList );
 
