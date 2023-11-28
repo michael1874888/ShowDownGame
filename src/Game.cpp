@@ -63,7 +63,7 @@ void Game::takeTurn( vector< Card > *pCompareList )
 {
     for( int i = 0; i < TOTAL_PLAYER_NUM; i++ ) {
 		// exchange hands
-		exchangeHands( i );
+		exchangeHands( i + 1 );
 
     	// show card
 		pCompareList->push_back( m_pPlayers[ i ]->show() );
@@ -119,7 +119,7 @@ void Game::exchangeHands( int nCurPlayerID )
 	do {
 		cout << "Please choose player you want to exchange(enter 0 if don't want to exchange): ";
 		cin >> nPlayerID;
-	}while( nPlayerID >= 0 && nPlayerID <= TOTAL_PLAYER_NUM && nPlayerID != nCurPlayerID );
+	}while( nPlayerID < 0 || nPlayerID > TOTAL_PLAYER_NUM || nPlayerID == nCurPlayerID );
 
 	// exchange hands
 	if( nPlayerID != 0 ) {
