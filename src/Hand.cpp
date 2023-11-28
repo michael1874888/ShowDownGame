@@ -53,6 +53,6 @@ int Hand::getCardCount() const
 void Hand::showCards( void )
 {
 	for( size_t i = 0; i < m_Cards.size(); i++ ) {
-        cout << "i + 1: " << m_Cards[ i ].getSuit() << " " << m_Cards[ i ].getRank() << endl;
+        cout << i + 1 << ": " << m_Cards[ i ].getSuit() << " " << m_Cards[ i ].getRank() << endl;
     }
 }
