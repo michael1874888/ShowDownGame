@@ -154,7 +154,7 @@ void Game::showWinner( void )
 {
 	int nWinnerIdx = 0;
 
-	for( size_t i = 0; i < m_pPlayers.size(); i++ ) {
+	for( size_t i = 0; i < ( m_pPlayers.size() - 1 ); i++ ) {
 		if( m_pPlayers[ i + 1 ]->getPoints() > m_pPlayers[ i ]->getPoints() ) {
 			nWinnerIdx = i + 1;
 		}
