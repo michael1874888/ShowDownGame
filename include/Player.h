@@ -20,7 +20,7 @@ public:
 
 	void exchangeHands( unique_ptr<Player> &OtherPlayer );
 
-    virtual Card show( void ) = 0;
+    virtual optional< Card > show( void ) = 0;
 
     void addPoint( int nAmount );
 

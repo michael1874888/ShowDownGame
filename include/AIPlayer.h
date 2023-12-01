@@ -12,7 +12,7 @@ public:
 
 	~AIPlayer();
 
-    Card show( void ) override;
+    optional< Card > show( void ) override;
 };
 
 #endif

@@ -3,6 +3,7 @@
 #include <vector>
 #include <stdexcept>
 #include <memory>
+#include <optional>
 #include "DeckDef.h"
 #include "Card.h"
 #include "Hand.h"
@@ -19,7 +20,7 @@ AIPlayer::~AIPlayer()
 {
 }
 
-Card AIPlayer::show( void )
+optional< Card > AIPlayer::show( void )
 {
 	return m_pHand->takeRandomCard();
 }

@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <memory> 
+#include <optional>
 #include "DeckDef.h"
 #include "Card.h"
 #include "Deck.h"
@@ -72,7 +73,12 @@ void Game::takeTurn( vector< Card > *pCompareList )
 		exchangeHands( i  );
 
     	// show card
-		pCompareList->push_back( m_pPlayers[ i ]->show() );
+		optional< Card > ShowedCard = m_pPlayers[ i ]->show();
+
+		// store in the compare list
+		if( ShowedCard.has_value() ) {
+			pCompareList->push_back( ShowedCard.value() );
+		}
 	}
 }
 

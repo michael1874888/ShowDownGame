@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
-#include <memory> 
+#include <memory>
+#include <optional>
 #include "Card.h"
 #include "Hand.h"
 #include "DeckDef.h"

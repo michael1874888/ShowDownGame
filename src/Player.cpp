@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <optional>
 #include "Card.h"
 #include "Hand.h"
 #include "DeckDef.h"

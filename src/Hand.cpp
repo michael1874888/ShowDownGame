@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cassert>
 #include <string>
+#include <optional>
 #include "Card.h"
 #include "Hand.h"
 
@@ -20,10 +21,13 @@ void Hand::setCard( Card Card )
     m_Cards.push_back( Card );
 }
 
-Card Hand::takeCard( int nIndex )
+optional< Card > Hand::takeCard( int nIndex )
 {
-    // TODO: deal with empty cards
-    Card takeCard = std::move( m_Cards[ nIndex ] );
+	if( nIndex < 0 || nIndex >= ( int )m_Cards.size() ) {
+		return nullopt;
+	}
+
+	Card takeCard = std::move( m_Cards[ nIndex ] );
 
 	// 從 vector 中移除該 Card
 	m_Cards.erase( m_Cards.begin() + nIndex );
@@ -31,7 +35,7 @@ Card Hand::takeCard( int nIndex )
 	return takeCard;
 }
 
-Card Hand::takeRandomCard( void )
+optional< Card > Hand::takeRandomCard( void )
 {
 	std::random_device rd;
 	std::mt19937 gen( rd() );// 以隨機數種子初始化 Mersenne Twister 產生器

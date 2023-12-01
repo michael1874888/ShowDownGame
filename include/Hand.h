@@ -14,9 +14,9 @@ public:
 
 	void setCard( Card Card );
 
-	Card takeCard( int nIndex );
+	optional< Card > takeCard( int nIndex );
 
-	Card takeRandomCard( void );
+	optional< Card > takeRandomCard( void );
 
 	int getCardCount() const;
 

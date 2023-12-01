@@ -12,7 +12,7 @@ public:
 
 	~HumanPlayer();
 
-    Card show( void ) override;
+    optional< Card > show( void ) override;
 };
 
 #endif

@@ -3,6 +3,7 @@
 #include <vector>
 #include <stdexcept>
 #include <memory>
+#include <optional>
 #include "DeckDef.h"
 #include "Card.h"
 #include "Hand.h"
@@ -19,9 +20,13 @@ HumanPlayer::~HumanPlayer()
 {
 }
 
-Card HumanPlayer::show( void )
+optional< Card > HumanPlayer::show( void )
 {
 	int nIndex;
+
+	if( m_pHand->getCardCount() == 0 ) {
+		return nullopt;
+	}
 
 	cout << "Please choose a card to show:" << endl;
 	m_pHand->showCards();

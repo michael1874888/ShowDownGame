@@ -2,12 +2,12 @@
 #include <stdexcept>
 #include <memory>
 #include <string>
+#include <optional>
 #include "DeckDef.h"
 #include "Card.h"
 #include "Hand.h"
 #include "Deck.h"
 #include "Player.h"
-#include "Hand.h"
 #include "ExchangeHandEvent.h"
 
 ExchangeHandEvent::ExchangeHandEvent( Player *pPlayer1, Player *pPlayer2 )
