@@ -10,7 +10,6 @@
 #include "ExchangeHandEvent.h"
 #include "Player.h"
 
-
 Player::Player()
 {
     m_nPoints = 0;
@@ -43,12 +42,9 @@ void Player::drawCards( Deck &Deck )
 
 void Player::exchangeHands( unique_ptr<Player> &OtherPlayer )
 {
-    if( m_pExchangeHand != NULL ) {
-		return;
-	}
-
-	m_pExchangeHand->setTargetPlayer( OtherPlayer.get() );
-	OtherPlayer->setExchangeHandEvent( m_pExchangeHand );
+	shared_ptr< ExchangeHandEvent > Event = make_shared< ExchangeHandEvent >( this, OtherPlayer.get() );
+	m_ExchangeHandEvents.push_back( Event );
+	Event->exchange();
 }
 
 void Player::addPoint( int nAmount )
@@ -73,7 +69,9 @@ void Player::setHands( Hand *pHand )
     m_pHand = pHand;
 }
 
-void Player::setExchangeHandEvent( ExchangeHandEvent *pEvent )
+void Player::notifyRoundFinished( void )
 {
-    m_pExchangeHand = pEvent;
+	for( auto &Event : m_ExchangeHandEvents ) {
+		Event->updateRound();
+	}
 }

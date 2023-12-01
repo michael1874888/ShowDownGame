@@ -33,6 +33,8 @@ private:
 
     void showWinner( void );
 
+    void notifyRoundFinished( void );
+
 	vector< unique_ptr< Player > > m_pPlayers;
 
     Deck m_Deck;

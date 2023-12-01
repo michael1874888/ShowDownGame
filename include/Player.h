@@ -30,7 +30,7 @@ public:
 
     void setHands( Hand *pHand );
 
-    void setExchangeHandEvent( ExchangeHandEvent *pEvent );
+    void notifyRoundFinished( void );
 
 protected:
     string m_Name;
@@ -39,7 +39,7 @@ protected:
 
     int m_nPoints;
 
-    ExchangeHandEvent *m_pExchangeHand;
+    vector< shared_ptr< ExchangeHandEvent > > m_ExchangeHandEvents;
 };
 
 #endif

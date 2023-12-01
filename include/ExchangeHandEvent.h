@@ -8,11 +8,9 @@ class Player;
 class ExchangeHandEvent
 {
 public:
-    ExchangeHandEvent( Player *pPlayer1 );
+    ExchangeHandEvent( Player *pPlayer1, Player *pPlayer2 );
 
     ~ExchangeHandEvent();
-
-    void setTargetPlayer( Player *pTargetPlayer );
 
     void exchange( void );
 

@@ -59,6 +59,9 @@ void Game::executeRounds( void )
 
 		// decide winner and give points to players
 		pickWinnerForRound( CompareList );
+
+		// notify players that the current round is over
+		notifyRoundFinished();
 	}
 }
 
@@ -66,7 +69,7 @@ void Game::takeTurn( vector< Card > *pCompareList )
 {
     for( int i = 0; i < TOTAL_PLAYER_NUM; i++ ) {
 		// exchange hands
-		exchangeHands( i + 1 );
+		exchangeHands( i  );
 
     	// show card
 		pCompareList->push_back( m_pPlayers[ i ]->show() );
@@ -116,18 +119,27 @@ void Game::drawCards( void )
 
 void Game::exchangeHands( int nCurPlayerID )
 {
+	string WantExchange;
 	int nPlayerID;
 
 	// ask player if want to exchange
+	cout << "Do ypu want to exchange hands with other player?(y/n)" << endl;
+	cin >> WantExchange;
+
+	// return if the player doesn't want to exchange
+	if( WantExchange == "n" ) {
+		return;
+	}
+
+	// ask target to exchange
 	do {
-		cout << "Please choose player you want to exchange(enter 0 if don't want to exchange): ";
+		cout << "Please choose player you want to exchange: ";
 		cin >> nPlayerID;
-	}while( nPlayerID < 0 || nPlayerID > TOTAL_PLAYER_NUM || nPlayerID == nCurPlayerID );
+		nPlayerID -= 1;		//  -1 to match the real index
+	}while( nPlayerID < 0 || nPlayerID >= TOTAL_PLAYER_NUM || nPlayerID == nCurPlayerID );
 
 	// exchange hands
-	if( nPlayerID != 0 ) {
-		m_pPlayers[ nCurPlayerID ]->exchangeHands( m_pPlayers[ nPlayerID ] );
-	}
+	m_pPlayers[ nCurPlayerID ]->exchangeHands( m_pPlayers[ nPlayerID ] );
 }
 
 void Game::displayCards( const vector< Card > &CompareList )
@@ -148,6 +160,7 @@ void Game::pickWinnerForRound( const vector< Card > &CompareList )
 	}
 
 	m_pPlayers[ nWinnerIndex ]->addPoint( 1 );
+	cout << m_pPlayers[ nWinnerIndex ]->getName() << " win the round" << endl;
 }
 
 void Game::showWinner( void )
@@ -161,4 +174,11 @@ void Game::showWinner( void )
 	}
 
 	cout << "The winner goes to :" << m_pPlayers[ nWinnerIdx ]->getName() << endl;
+}
+
+void Game::notifyRoundFinished( void )
+{
+	for( auto &Player : m_pPlayers ) {
+		Player->notifyRoundFinished();
+	}
 }

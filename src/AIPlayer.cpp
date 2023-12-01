@@ -13,12 +13,10 @@
 
 AIPlayer::AIPlayer()
 {
-	m_pExchangeHand = new ExchangeHandEvent( ( Player * ) this );
 }
 
 AIPlayer::~AIPlayer()
 {
-	delete m_pExchangeHand;
 }
 
 Card AIPlayer::show( void )

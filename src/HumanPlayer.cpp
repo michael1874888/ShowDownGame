@@ -13,12 +13,10 @@
 
 HumanPlayer::HumanPlayer()
 {
-	m_pExchangeHand = new ExchangeHandEvent( ( Player * ) this );
 }
 
 HumanPlayer::~HumanPlayer()
 {
-	delete m_pExchangeHand;
 }
 
 Card HumanPlayer::show( void )
