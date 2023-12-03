@@ -31,8 +31,12 @@ void ExchangeHandEvent::exchange( void )
 
 void ExchangeHandEvent::updateRound(void)
 {
-    m_nRound++;
+    // return if the exchange event is already completed
+    if( m_nRound > 3 ) {
+        return;
+    }
 
+    m_nRound++;
     if( m_nRound >= 3 ) {
         exchange();
     }
