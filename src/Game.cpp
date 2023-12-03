@@ -161,7 +161,7 @@ void Game::pickWinnerForRound( const vector< optional< Card > > &CompareList )
 	int nWinnerIndex = 0;
 	Card biggestCard( Card::ER_Two, Card::ES_Club ); // initialize to the smallest card
 
-	for( size_t i = 0; i < CompareList.size() - 1; i++ ) {
+	for( size_t i = 0; i < CompareList.size(); i++ ) {
 		if( CompareList[ i ].has_value() == false ) {
 			continue;
 		}

@@ -2,10 +2,6 @@
 #include <cassert>
 #include "Card.h"
 
-Card::Card( void )
-{
-}
-
 Card::Card( ERank Rank, ESuit Suit )
 {
     m_Rank = Rank;
