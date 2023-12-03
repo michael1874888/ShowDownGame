@@ -17,7 +17,7 @@ public:
 private:
     void executeRounds( void );
 
-    void takeTurn( vector< Card > *pCompareList );
+    void takeTurn( vector< optional< Card > > *pCompareList );
 
     void createPlayers( void );
 
@@ -27,9 +27,9 @@ private:
 
     void exchangeHands( int nCurPlayerID );
 
-    void displayCards( const vector< Card > &CompareList );
+    void displayCards( const vector< optional< Card > > &CompareList );
 
-    void pickWinnerForRound( const vector< Card > &CompareList );
+    void pickWinnerForRound( const vector< optional< Card > > &CompareList );
 
     void showWinner( void );
 

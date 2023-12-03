@@ -46,7 +46,7 @@ void Game::start( void )
 
 void Game::executeRounds( void )
 {
-	vector< Card > CompareList;
+	vector< optional< Card > > CompareList;
 
 	for( int i = 0; i < TOTAL_ROUNDS; i++ ) {
 		// initialize vector
@@ -66,7 +66,7 @@ void Game::executeRounds( void )
 	}
 }
 
-void Game::takeTurn( vector< Card > *pCompareList )
+void Game::takeTurn( vector< optional< Card > > *pCompareList )
 {
     for( int i = 0; i < TOTAL_PLAYER_NUM; i++ ) {
 		// exchange hands
@@ -76,9 +76,7 @@ void Game::takeTurn( vector< Card > *pCompareList )
 		optional< Card > ShowedCard = m_pPlayers[ i ]->show();
 
 		// store in the compare list
-		if( ShowedCard.has_value() ) {
-			pCompareList->push_back( ShowedCard.value() );
-		}
+		pCompareList->push_back( ShowedCard );
 	}
 }
 
@@ -148,20 +146,29 @@ void Game::exchangeHands( int nCurPlayerID )
 	m_pPlayers[ nCurPlayerID ]->exchangeHands( m_pPlayers[ nPlayerID ] );
 }
 
-void Game::displayCards( const vector< Card > &CompareList )
+void Game::displayCards( const vector< optional< Card > > &CompareList )
 {
 	for( size_t i = 0; i < CompareList.size(); i++ ) {
-		cout << "Player" << i + 1 << ": " << CompareList[ i ].getSuit() << " " << CompareList[ i ].getRank() << endl;
+		if( CompareList[ i ].has_value() ) {
+			Card card = CompareList[ i ].value();
+			cout << "Player" << i + 1 << ": " << card.getSuit() << " " << card.getRank() << endl;
+		}
 	}
 }
 
-void Game::pickWinnerForRound( const vector< Card > &CompareList )
+void Game::pickWinnerForRound( const vector< optional< Card > > &CompareList )
 {
 	int nWinnerIndex = 0;
+	Card biggestCard( Card::ER_Two, Card::ES_Club ); // initialize to the smallest card
 
 	for( size_t i = 0; i < CompareList.size() - 1; i++ ) {
-		if( CompareList[ i + 1 ] > CompareList[ i ] ) {
-			nWinnerIndex = i + 1;
+		if( CompareList[ i ].has_value() == false ) {
+			continue;
+		}
+
+		if( CompareList[ i ].value() > biggestCard ) {
+			biggestCard = CompareList[ i ].value();
+			nWinnerIndex = ( int )i;
 		}
 	}
 
